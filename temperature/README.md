@@ -15,6 +15,8 @@ Ok to reboot
 
 ## Connections
 
+![Image of connection](image1.png)
+
 Use 4.7K Ohm or 10K Ohm resistor!
 
 ## Usage
