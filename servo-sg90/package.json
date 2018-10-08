@@ -1,0 +1,13 @@
+{
+  "name": "servo-sg90",
+  "version": "1.0.0",
+  "description": "Raspberry Pi Servo SG90",
+  "main": "index.js",
+  "author": "Justas Palumickas",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "johnny-five": "^1.0.0",
+    "raspi-io": "^9.0.0"
+  }
+}
