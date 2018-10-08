@@ -1,0 +1,13 @@
+{
+  "name": "proximity-hc-sr04",
+  "version": "1.0.0",
+  "description": "Raspberry Pi Proximity sensor HC-SR04",
+  "main": "index.js",
+  "author": "Justas Palumickas",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "johnny-five": "^1.0.0",
+    "pi-io": "^0.5.1"
+  }
+}
