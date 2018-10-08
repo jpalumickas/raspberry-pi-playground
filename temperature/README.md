@@ -1,4 +1,4 @@
-# Temperaterue sensor
+# Temperature sensor
 
 ## Enable 1-Wire Interface
 
@@ -15,7 +15,7 @@ Ok to reboot
 
 ## Connections
 
-![Image of connection](image1.png)
+![Image of connection](image.png)
 
 Use 4.7K Ohm or 10K Ohm resistor!
 
