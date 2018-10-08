@@ -1,0 +1,12 @@
+{
+  "name": "raspberry-pi-led-example",
+  "version": "1.0.0",
+  "description": "Raspberry Pi LED example",
+  "main": "index.js",
+  "author": "Justas Palumickas",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "onoff": "^3.2.2"
+  }
+}
