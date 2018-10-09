@@ -1,0 +1,6 @@
+#!/bin/bash
+
+currentdir=$(dirname "$0")
+dir="$(dirname "$currentdir")"
+
+rsync -azP --delete --human-readable --exclude node_modules --exclude .DS_Store ${dir} pi@raspberrypi.local:~/Projects/car
