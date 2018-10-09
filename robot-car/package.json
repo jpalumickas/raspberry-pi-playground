@@ -6,6 +6,7 @@
   "dependencies": {
     "dualshock": "3.1.1",
     "johnny-five": "^1.0.0",
+    "lodash": "^4.17.11",
     "node-hid": "^0.7.3",
     "pi-io": "^0.5.1",
     "raspi-io": "^9.0.0",

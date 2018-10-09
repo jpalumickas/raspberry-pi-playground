@@ -59,8 +59,6 @@ const handleDirection = ({ x, y }) => {
 };
 
 const handleSimpleDirection = ({x, y }) => {
-  let leftDirection = 'forward';
-  let rightDirection = 'forward';
   let leftSpeed = 0;
   let rightSpeed = 0;
 
@@ -68,23 +66,17 @@ const handleSimpleDirection = ({x, y }) => {
     leftSpeed = 255;
     rightSpeed = 255;
   } else if (y < -150) {
-    leftDirection = 'reverse';
-    rightDirection = 'reverse';
-    leftSpeed = 255;
-    rightSpeed = 255;
+    leftSpeed = -255;
+    rightSpeed = -255;
   } else if (x < -150) {
-    leftDirection = 'reverse';
-    leftSpeed = 255;
+    leftSpeed = -255;
     rightSpeed = 255;
   } else if (x > 150) {
-    rightDirection = 'reverse';
     leftSpeed = 255;
-    rightSpeed = 255;
+    rightSpeed = -255;
   }
 
   return {
-    leftDirection,
-    rightDirection,
     leftSpeed,
     rightSpeed,
   };
@@ -132,10 +124,5 @@ class DualShock {
     }
   }
 };
-
-// ds = new DualShock();
-// ds.onMove((directions) => {
-//   console.log(directions);
-// });
 
 module.exports = DualShock;
