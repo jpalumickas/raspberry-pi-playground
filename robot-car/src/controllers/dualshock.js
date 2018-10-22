@@ -1,4 +1,5 @@
 const dualshock = require('dualshock');
+const EventEmitter = require('events');
 
 const normalizeXY = ({ x, y }) => {
   const normalize = (val) => {
@@ -82,20 +83,45 @@ const handleSimpleDirection = ({x, y }) => {
   };
 }
 
-class DualShock {
+class DualShockController {
   constructor() {
-    this.devices = dualshock.getDevices();
-    this.device = this.devices[0];
-    if (!this.device) {
-      console.warn('PS4 DualShock controller not found.');
-    }
+    this.events = new EventEmitter();
+  }
 
+  loadDevice() {
+    console.log('Loading PS4 DualShock controller...');
+    this.loadDeviceInterval = setInterval(() => {
+      this.devices = dualshock.getDevices();
+      this.device = this.devices[0];
+      console.log('Trying to connect to PS4 DualShock controller...');
+      if (this.device) {
+        this.initDevice();
+        clearInterval(this.loadDeviceInterval);
+        this.events.emit('ready', this.gamepad);
+        console.log('PS4 DualShock controller ready.');
+      }
+    }, 1000);
+  }
+
+  initDevice() {
     this.gamepad = dualshock.open(this.device, {
       smoothAnalog: 10,
       smoothMotion: 15,
       joyDeadband: 4,
       moveDeadband: 4
     });
+
+    this.initOnUpdate();
+  }
+
+  on(event, callback) {
+    this.events.on(event, callback);
+
+    if (event === 'ready') {
+      this.loadDevice();
+    }
+
+    return this;
   }
 
   gamepad() {
@@ -114,15 +140,16 @@ class DualShock {
     this.gamepad.rumble(0, 0);
   }
 
-  onMove(callback) {
+  initOnUpdate() {
+    const that = this;
     this.gamepad.onupdate = function(changed) {
       if (changed.lStickX || changed.lStickY) {
         const { x, y } = normalizeXY({ x: this.analog.lStickX, y: this.analog.lStickY });
-        const directions = handleSimpleDirection({ x, y });
-        callback(directions);
+        const state = handleSimpleDirection({ x, y });
+        that.events.emit('move', state);
       }
     }
   }
 };
 
-module.exports = DualShock;
+module.exports = DualShockController;

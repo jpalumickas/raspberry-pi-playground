@@ -1,10 +1,12 @@
 const _isEqual = require('lodash/isEqual');
-const injectHttp = require('./src/injectHttp');
+// const injectHttp = require('./src/injectHttp');
 const DualShockController = require('./src/controllers/dualshock');
+const HttpServerController = require('./src/controllers/http-server');
 const config = require('./src/config');
 const Robot = require('./src/robot');
 
 const dualshock = new DualShockController();
+const httpServer = new HttpServerController();
 const robot = new Robot();
 
 let state = {
@@ -19,6 +21,8 @@ const setState = (obj) => {
 }
 
 robot.on('ready', () => {
+  robot.moveServoRight();
+
   robot.on('distance', (distance) => {
     setState({ distance });
   });
@@ -36,7 +40,7 @@ robot.on('ready', () => {
     } else if (state.leftSpeed < state.rightSpeed) {
       robot.moveServoLeft();
     } else {
-      robot.stopServo();
+      robot.moveServoCenter();
     }
 
     if (state.leftSpeed > 0 || state.rightSpeed > 0) {
@@ -56,7 +60,11 @@ robot.on('ready', () => {
     robot.move(state.leftSpeed, state.rightSpeed);
   }, 100);
 
-  dualshock.onMove(setState);
+  dualshock.on('ready', () => {
+    dualshock.on('move', setState);
+  });
+
+  httpServer.on('move', setState);
 });
 
 // const boards = new five.Boards(
