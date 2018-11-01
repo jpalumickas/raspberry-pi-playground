@@ -1,8 +1,11 @@
 {
-  "name": "car",
+  "name": "robot-car",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "author": "Justas Palumickas",
+  "private": true,
+  "license": "MIT",
   "dependencies": {
     "dualshock": "3.1.1",
     "johnny-five": "^1.0.0",
@@ -11,11 +14,5 @@
     "pi-io": "^0.5.1",
     "raspi-io": "^9.0.0",
     "socket.io": "^2.1.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
