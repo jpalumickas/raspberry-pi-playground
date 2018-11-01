@@ -34,7 +34,7 @@ class HttpServer {
   }
 
   move({ leftSpeed, rightSpeed }) {
-    that.events.emit('move', { leftSpeed, rightSpeed });
+    this.events.emit('move', { leftSpeed, rightSpeed });
   }
 
   loadSockets() {

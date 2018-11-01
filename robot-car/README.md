@@ -50,3 +50,9 @@ Restart service
 ```sh
 sudo systemctl restart robot-car
 ```
+
+Tail logs
+
+```sh
+journalctl -u robot-car.service -f
+```

@@ -129,6 +129,9 @@ class DualShockController {
   }
 
   rumble() {
+    if (!this.device) { return; }
+    if (!this.gamepad) { return; }
+
     clearInterval(this.rumbleInterval);
     this.gamepad.rumbleAdd(20, 20);
     this.rumbleInterval = setTimeout(() => {
@@ -137,6 +140,9 @@ class DualShockController {
   }
 
   rumbleStop() {
+    if (!this.device) { return; }
+    if (!this.gamepad) { return; }
+
     this.gamepad.rumble(0, 0);
   }
 
